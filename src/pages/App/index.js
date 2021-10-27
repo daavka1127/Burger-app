@@ -4,6 +4,7 @@ import css from "./style.module.css";
 import Toolbar from "../../components/Toolbar";
 import BurgerPage from "../BurgerPage";
 import SideBar from "../../components/SideBar";
+import OrderPage from "../OrderPage";
 
 class App extends Component {
   state = {
@@ -28,6 +29,7 @@ class App extends Component {
 
         <main className={css.Content}>
           <BurgerPage />
+          <OrderPage />
         </main>
       </div>
     );

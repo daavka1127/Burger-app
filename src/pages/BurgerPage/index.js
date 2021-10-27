@@ -127,9 +127,6 @@ class BurgerBuilder extends Component {
           
         </Modal>
         {this.state.loading && <Spinner />}
-        <p>
-          Сүүлчийн захиалагч: {this.state.lastCustomerName}
-        </p>
         <Burger orts={this.state.ingredients} />
         <BuildControls
           showConfirmModal={this.showConfirmModal}
