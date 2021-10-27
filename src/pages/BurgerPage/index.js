@@ -32,23 +32,7 @@ class BurgerBuilder extends Component {
   };
 
   componentDidMount = () => {
-    this.setState({ loading:true });
-    axios.get('/orders.json').then(response => {
-      let arr = Object.entries(response.data);
-      arr = arr.reverse();
-      console.log(arr);
-      arr.forEach(el=>{
-        console.log(el[1].hayg.name);
-      });
-
-      const lastOrder = arr[arr.length - 1][1];
-      // console.log("object");
-      // console.log(lastOrder);
-
-      this.setState({ingredients: lastOrder.ingredients, totalPrice: lastOrder.dun, lastCustomerName: lastOrder.hayg.name});
-    }).catch(err => console.log(err)).finally(() => {
-      this.setState({ loading: false });
-    });
+    
   }
 
   continueOrder = () => {
@@ -126,7 +110,6 @@ class BurgerBuilder extends Component {
           
           
         </Modal>
-        {this.state.loading && <Spinner />}
         <Burger orts={this.state.ingredients} />
         <BuildControls
           showConfirmModal={this.showConfirmModal}

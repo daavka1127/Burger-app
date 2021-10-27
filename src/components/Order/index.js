@@ -3,7 +3,7 @@ import React from 'react'
 import css from "./style.module.css"
 
 export default function Order(props) {
-    console.log(props.order)
+    // console.log(props.order)
     return (
         <div className={css.Order}>
             <p>

@@ -25,7 +25,7 @@ class OrderPage extends Component{
     }
 
     render(){
-        console.log(this.state.orders);
+        // console.log(this.state.orders);
         return <div>
             {this.state.loading ? (
                 <Spinner dada={this.setState.orders} />
