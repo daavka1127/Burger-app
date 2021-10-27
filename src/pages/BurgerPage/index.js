@@ -36,22 +36,38 @@ class BurgerBuilder extends Component {
   }
 
   continueOrder = () => {
-    const order = {
-      ingredients: this.state.ingredients,
-      dun: this.state.totalPrice,
-      hayg:{
-        name: "Dadaa",
-        city: 'UB',
-        street: "10r horoolol 23-12"
-      }
-    };
-    this.setState({loading: true});
-    axios.post("/orders.json", order).then(response =>{
-      alert("Amjilttai hadgallaa");
-    }).finally(() => {
-      this.setState({loading: false});
+    // const order = {
+    //   ingredients: this.state.ingredients,
+    //   dun: this.state.totalPrice,
+    //   hayg:{
+    //     name: "Dadaa",
+    //     city: 'UB',
+    //     street: "10r horoolol 23-12"
+    //   }
+    // };
+    // this.setState({loading: true});
+    // axios.post("/orders.json", order).then(response =>{
+    //   alert("Amjilttai hadgallaa");
+    // }).finally(() => {
+    //   this.setState({loading: false});
+    // });
+    // console.log("continue daragdlaa...");
+
+    const params = [];
+
+    for(let orts in this.state.ingredients){
+      params.push(orts + "=" + this.state.ingredients[orts]);
+    }
+
+    const query = params.join("&");
+    console.log(query);
+
+    this.props.history.push({
+      pathname: "/ship",
+      search: query
     });
-    console.log("continue daragdlaa...");
+
+    this.closeConfirmModal();
   };
 
   showConfirmModal = () => {
