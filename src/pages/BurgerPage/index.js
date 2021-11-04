@@ -16,7 +16,7 @@ const INGREDIENT_NAMES = {
   salad: "Салад"
 };
 
-class BurgerBuilder extends Component {
+class BurgerPage extends Component {
   state = {
     ingredients: {
       salad: 0,
@@ -112,7 +112,7 @@ class BurgerBuilder extends Component {
           
           
         </Modal>
-        <Burger orts={this.state.ingredients} />
+        <Burger choose={this.props.choose} orts={this.state.ingredients} />
         <BuildControls
           showConfirmModal={this.showConfirmModal}
           ingredientsNames={INGREDIENT_NAMES}
@@ -127,4 +127,4 @@ class BurgerBuilder extends Component {
   }
 }
 
-export default BurgerBuilder;
+export default BurgerPage;
