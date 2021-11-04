@@ -36,22 +36,7 @@ class BurgerBuilder extends Component {
   }
 
   continueOrder = () => {
-    // const order = {
-    //   ingredients: this.state.ingredients,
-    //   dun: this.state.totalPrice,
-    //   hayg:{
-    //     name: "Dadaa",
-    //     city: 'UB',
-    //     street: "10r horoolol 23-12"
-    //   }
-    // };
-    // this.setState({loading: true});
-    // axios.post("/orders.json", order).then(response =>{
-    //   alert("Amjilttai hadgallaa");
-    // }).finally(() => {
-    //   this.setState({loading: false});
-    // });
-    // console.log("continue daragdlaa...");
+    
 
     const params = [];
 
@@ -59,8 +44,9 @@ class BurgerBuilder extends Component {
       params.push(orts + "=" + this.state.ingredients[orts]);
     }
 
+    params.push("dun=" + this.state.totalPrice);
+
     const query = params.join("&");
-    console.log(query);
 
     this.props.history.push({
       pathname: "/ship",

@@ -6,41 +6,62 @@ import Button from "../../components/General/Button";
 
 import css from "./style.module.css";
 
-export default class ShippingPage extends Component{
-    state = {
-        ingredients: {
-            salad: 1,
-            cheese: 2,
-            bacon: 1,
-            meat: 1
-        }
-    }
+export default class ShippingPage extends Component {
+  state = {
+    ingredients: null,
+    price: 0
+  };
 
-    componentDidMount(){
-        const query = new URLSearchParams(this.props.location.search);
-        
-        const ingredients = {};
-        for(let param of query.entries()){
+  componentWillMount() {
+    const query = new URLSearchParams(this.props.location.search);
+
+    let price = 0;
+    const ingredients = {};
+    for (let param of query.entries()) {
+        if(param[0] !== "dun"){
             ingredients[param[0]] = param[1];
+        }else{
+            price = param[1];
         }
-        this.setState({ingredients});
     }
+    this.setState({ ingredients, price });
+  }
 
-    goBack = () =>{
-        this.props.history.goBack();
-    }
+  cancelOrder = () => {
+    this.props.history.goBack();
+  };
 
-    showContactData = () =>{
-        this.props.history.push('/ship/contact');
-    }
+  showContactData = () => {
+    this.props.history.replace("/ship/contact");
+  };
 
-    render(){
-        return <div className={css.ShippingPage}>
-            <p style={{fontSize: "24px"}}><strong>Таны захиалга амттай болно гэж найдаж байна...</strong></p>
-            <Burger orts={this.state.ingredients} />
-            <Button daragdsan={this.goBack} btnType="Danger" text="ЗАХИАЛГЫГ ЦУЦЛАХ" />
-            <Button daragdsan={this.showContactData} btnType="Success" text="ХҮРГЭЛТИЙН МЭДЭЭЛЭЛ ОРУУЛАХ" />
-            <Route exact path="/ship/contact" component={ContactData} />
-        </div>;
-    }
+  render() {
+    return (
+      <div className={css.ShippingPage}>
+        <p style={{ fontSize: "24px" }}>
+          <strong>Таны захиалга амттай болно гэж найдаж байна...</strong>
+        </p>
+        <p style={{ fontSize: "24px" }}>
+          <strong>Дүн : {this.state.price}</strong>
+        </p>
+        <Burger orts={this.state.ingredients} />
+        <Button
+          daragdsan={this.cancelOrder}
+          btnType="Danger"
+          text="ЗАХИАЛГЫГ ЦУЦЛАХ"
+        />
+        <Button
+          daragdsan={this.showContactData}
+          btnType="Success"
+          text="ХҮРГЭЛТИЙН МЭДЭЭЛЭЛ ОРУУЛАХ"
+        />
+        <Route exact path="/ship/contact" > 
+            <ContactData ingredients={this.state.ingredients} price={this.state.price} />
+        </Route>
+        {/* <Route exact path="/ship/contact" render={() => (
+            <ContactData ingredients={this.state.ingredients} price={this.state.price} />
+        )} />  */}
+      </div>
+    );
+  }
 }
