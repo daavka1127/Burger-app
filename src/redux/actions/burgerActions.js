@@ -5,7 +5,7 @@ export const addIngredient = (nemehOrts) => {
     }
 }
 
-export const removeIngredient = (hasahOrts, or) => {
+export const removeIngredient = (hasahOrts) => {
     return {
         type: 'REMOVE_INGREDIENT',
         hasahOrts

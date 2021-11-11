@@ -1,6 +1,7 @@
 import React from "react";
 import BurgerIngredient from "../BurgerIngredient";
 import css from "./style.module.css";
+import { connect } from "react-redux";
 
 import { withRouter } from "react-router";
 
@@ -31,4 +32,10 @@ const Burger = props => {
   );
 };
 
-export default withRouter(Burger);
+const mapStateToProps = state => {
+  return {
+    orts: state.ingredients
+  }
+}
+
+export default connect(mapStateToProps)(withRouter(Burger));
