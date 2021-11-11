@@ -5,10 +5,18 @@ import App from "./pages/App";
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter } from "react-router-dom";
 
+import {createStore} from "redux";
+import {Provider} from "react-redux";
+import burgerReducer from "./redux/reducer/burgerReducer";
+
+const store = createStore(burgerReducer);
+
 ReactDOM.render(
-    <BrowserRouter>
-        <App />
-    </BrowserRouter>, 
+    <Provider store={store}>
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>
+    </Provider>, 
     document.getElementById("root")
 );
 

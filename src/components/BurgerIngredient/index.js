@@ -15,25 +15,21 @@ const BurgerIngredient = props => {
   if (props.type === "salad")
   return (
     <div className={css.Salad}>
-      <button onClick={() => props.choose("Салад")}>X</button>
     </div>
   );
   if (props.type === "bacon")
   return (
     <div className={css.Bacon}>
-      <button onClick={() => props.choose("Гахайн мах")}>X</button>
     </div>
   );
   if (props.type === "meat")
   return (
     <div className={css.Meat}>
-      <button onClick={() => props.choose("Үхрийн мах")}>X</button>
     </div>
   );
   if (props.type === "cheese")
   return (
     <div className={css.Cheese}>
-      <button onClick={() => props.choose("Бяслаг")}>X</button>
     </div>
   );
   if (props.type === "bread-bottom")

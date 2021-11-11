@@ -10,8 +10,7 @@ import ShippingPage from "../ShippingPage";
 
 class App extends Component {
   state = {
-    showSidebar: false,
-    favorite: "N/A"
+    showSidebar: false
   };
 
   toggleSideBar = () => {
@@ -19,10 +18,6 @@ class App extends Component {
       return { showSidebar: !prevState.showSidebar };
     });
   };
-
-  choose = (orts) => {
-    this.setState({favorite: orts});
-  }
 
   render() {
     return (
@@ -35,9 +30,8 @@ class App extends Component {
         />
 
         <main className={css.Content}>
-          <p>Сонгосон орц : {this.state.favorite}</p>
           <Switch>
-            <Route exact path="/" render={() =>(<BurgerPage choose={this.choose} />)} />
+            <Route exact path="/" render={() =>(<BurgerPage />)} />
             <Route path="/orders" component={OrderPage} />
             <Route path="/ship" component={ShippingPage} />
           </Switch>

@@ -13,7 +13,6 @@ const Burger = props => {
     for (let i = 0; i < el[1]; i++)
       content.push(
         <BurgerIngredient 
-          choose={props.choose} 
           key={`${el[0]}${i + 1}`} 
           type={el[0]} 
         />
