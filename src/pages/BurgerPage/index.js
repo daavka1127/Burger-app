@@ -20,25 +20,7 @@ class BurgerPage extends Component {
   }
 
   continueOrder = () => {
-    
-
-    const params = [];
-
-    for(let orts in this.props.burgeriinOrts){
-      params.push(orts + "=" + this.props.burgeriinOrts[orts]);
-    }
-
-    params.push("dun=" + this.props.niitUne);
-
-    const query = params.join("&");
-    console.log(this.props.history);
-
-    this.props.history.push({
-      pathname: "/ship",
-      search: query
-    });
-
-    this.closeConfirmModal();
+    this.props.history.push("/ship");
   };
 
   showConfirmModal = () => {
@@ -50,6 +32,7 @@ class BurgerPage extends Component {
   };
 
   render() {
+    console.log(this.props);
     return (
       <div>
         <Modal

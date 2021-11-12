@@ -31,9 +31,9 @@ class App extends Component {
 
         <main className={css.Content}>
           <Switch>
-            <Route exact path="/" render={() =>(<BurgerPage />)} />
             <Route path="/orders" component={OrderPage} />
             <Route path="/ship" component={ShippingPage} />
+            <Route path="/" component={BurgerPage} />
           </Switch>
         </main>
       </div>

@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from "react-redux";
+import * as actions from "../../redux/actions/orderActions";
+
 import Button from '../General/Button';
 
 import css from "./style.module.css";
@@ -25,28 +28,19 @@ class ContactData extends Component {
         this.setState({city: e.target.value});
     }
     saveOrder = () => {
-        const order = {
+        const newOrder = {
         ingredients: this.props.ingredients,
         dun: this.props.price,
         hayg:{
-            name: this.state.name,
-            city: this.state.city,
-            street: this.state.street
-        }
+                name: this.state.name,
+                city: this.state.city,
+                street: this.state.street
+            }
         };
-        this.setState({loading: true});
-        axios.post("/orders.json", order)
-        .then(response =>{
-            alert("Amjilttai hadgallaa");
-        })
-        .catch(error => {
-            alert("Aldaa garlaa: " + error);
-        })
-        .finally(() => {
-            this.setState({loading: false});
-            this.props.history.replace("/orders");
-        });
-        console.log("continue daragdlaa...");
+
+        this.props.saveOrderAction(newOrder);
+        // this.setState({loading: true});
+        
     }
     render() {
         return (
@@ -65,4 +59,17 @@ class ContactData extends Component {
     }
 }
 
-export default withRouter(ContactData)
+const mapStateToProps = state =>{
+    return{
+        ingredients: state.ingredients,
+        price: state.totalPrice
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return{
+        saveOrderAction: (newOrder) => dispatch(actions.saveOrder(newOrder))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ContactData));

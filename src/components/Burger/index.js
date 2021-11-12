@@ -8,7 +8,6 @@ import { withRouter } from "react-router";
 const Burger = props => {
   //{bacon: 2, cheese: 2, meat: 1, salad: 1}
   const items = Object.entries(props.orts);
-
   let content = [];
   items.map(el => {
     for (let i = 0; i < el[1]; i++)
@@ -34,7 +33,7 @@ const Burger = props => {
 
 const mapStateToProps = state => {
   return {
-    orts: state.ingredients
+    orts: state.burgerReducer.ingredients
   }
 }
 

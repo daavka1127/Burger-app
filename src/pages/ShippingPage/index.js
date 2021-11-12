@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { Route } from "react-router";
 import Burger from "../../components/Burger";
 import ContactData from "../../components/ContactData";
@@ -6,26 +7,7 @@ import Button from "../../components/General/Button";
 
 import css from "./style.module.css";
 
-export default class ShippingPage extends Component {
-  state = {
-    ingredients: null,
-    price: 0
-  };
-
-  componentWillMount() {
-    const query = new URLSearchParams(this.props.location.search);
-
-    let price = 0;
-    const ingredients = {};
-    for (let param of query.entries()) {
-        if(param[0] !== "dun"){
-            ingredients[param[0]] = param[1];
-        }else{
-            price = param[1];
-        }
-    }
-    this.setState({ ingredients, price });
-  }
+class ShippingPage extends Component {
 
   cancelOrder = () => {
     this.props.history.goBack();
@@ -42,9 +24,9 @@ export default class ShippingPage extends Component {
           <strong>Таны захиалга амттай болно гэж найдаж байна...</strong>
         </p>
         <p style={{ fontSize: "24px" }}>
-          <strong>Дүн : {this.state.price}</strong>
+          <strong>Дүн : {this.props.price}</strong>
         </p>
-        <Burger orts={this.state.ingredients} />
+        <Burger />
         <Button
           daragdsan={this.cancelOrder}
           btnType="Danger"
@@ -55,8 +37,8 @@ export default class ShippingPage extends Component {
           btnType="Success"
           text="ХҮРГЭЛТИЙН МЭДЭЭЛЭЛ ОРУУЛАХ"
         />
-        <Route exact path="/ship/contact" > 
-            <ContactData ingredients={this.state.ingredients} price={this.state.price} />
+        <Route path="/ship/contact" > 
+            <ContactData />
         </Route>
         {/* <Route exact path="/ship/contact" render={() => (
             <ContactData ingredients={this.state.ingredients} price={this.state.price} />
@@ -65,3 +47,11 @@ export default class ShippingPage extends Component {
     );
   }
 }
+
+const mapStateToProps = state =>{
+  return {
+    price: state.totalPrice
+  }
+}
+
+export default connect(mapStateToProps)(ShippingPage);
