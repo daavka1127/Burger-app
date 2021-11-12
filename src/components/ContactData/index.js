@@ -53,7 +53,6 @@ class ContactData extends Component {
                         <Button text="ЗАХИАЛГЫГ ИЛГЭЭХ" daragdsan={this.saveOrder} btnType="Success" />
                     </div>
                 )}
-                
             </div>
         )
     }
