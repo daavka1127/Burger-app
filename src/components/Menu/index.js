@@ -10,6 +10,8 @@ const Menu = () => (
         ШИНЭ ЗАХИАЛГА
       </MenuItem>
       <MenuItem exact link="/orders">ЗАХИАЛГАНУУД</MenuItem>
+      <MenuItem exact link="/login">НЭВТРЭХ</MenuItem>
+      <MenuItem exact link="/signup">БҮРТГҮҮЛЭХ</MenuItem>
     </ul>
   </div>
 );

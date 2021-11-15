@@ -14,8 +14,13 @@ class ContactData extends Component {
     state ={
         city: null,
         name: null,
-        street: null,
-        loading: false
+        street: null
+    }
+
+    componentDidUpdate(){
+        if(this.props.newOrderStatus.finished && !this.props.newOrderStatus.error){
+            this.props.history.replace("/orders");
+        }
     }
 
     changeName = (e) =>{
@@ -37,6 +42,7 @@ class ContactData extends Component {
                 street: this.state.street
             }
         };
+        console.log(newOrder);
 
         this.props.saveOrderAction(newOrder);
         // this.setState({loading: true});
@@ -45,7 +51,10 @@ class ContactData extends Component {
     render() {
         return (
             <div className={css.ContactData}>
-                {this.state.loading ? <Spinner /> : (
+                <div>
+                    {this.props.newOrderStatus.error && `Захиалгыг хадгалах явцад алдаа гарлаа : ${this.props.newOrderStatus.error}`}
+                </div>
+                {this.props.newOrderStatus.saving ? <Spinner /> : (
                     <div>
                         <input onChange={this.changeName} type="text" name="name" placeholder="Таны нэр" />
                         <input onChange={this.changeStreet} type="text" name="street" placeholder="Таны гэрийн хаяг" />
@@ -60,8 +69,9 @@ class ContactData extends Component {
 
 const mapStateToProps = state =>{
     return{
-        ingredients: state.ingredients,
-        price: state.totalPrice
+        ingredients: state.burgerReducer.ingredients,
+        price: state.burgerReducer.totalPrice,
+        newOrderStatus: state.orderReducer.newOrder
     }
 }
 

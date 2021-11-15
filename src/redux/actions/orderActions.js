@@ -2,7 +2,7 @@ import axios from "../../axis-order";
 
 export const loadOrders = () =>{
     return function(dispatch){
-        dispatch(loadOrderStart);
+        dispatch(loadOrderStart());
 
         axios.get('/orders.json').then(response => {
             const loadedOrders = Object.entries(response.data).reverse();
@@ -12,7 +12,7 @@ export const loadOrders = () =>{
     }
 }
 
-export const loadOrderStart = () =>{
+export const loadOrderStart = () =>{    
     return{
         type: "LOAD_ORDERS_START"
     }
@@ -36,7 +36,7 @@ export const loadOrderError = (error) =>{
 // ORDER хадгалах хэсэг
 export const saveOrder = (newOrder) => {
     return function(dispatch){
-        saveOrderStart();
+        dispatch(saveOrderStart());
 
         axios.post("/orders.json", newOrder)
         .then(response =>{
@@ -61,8 +61,9 @@ export const saveOrderSuccess = () => {
     }
 }
 
-export const saveOrderError = () => {
+export const saveOrderError = (error) => {
     return{
-        type: "SAVE_ORDER_ERROR"
+        type: "SAVE_ORDER_ERROR",
+        error
     }
 }
